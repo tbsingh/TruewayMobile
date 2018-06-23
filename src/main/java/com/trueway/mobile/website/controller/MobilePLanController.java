@@ -29,6 +29,11 @@ public class MobilePLanController {
 		return planService.createMobilePlan(mobilePlan);
 		
 	}
+	 @GetMapping(path = {"/hello"})
+	 String sayHelo(){
+		return "Hi";
+		
+	}
 	
 }
 	
