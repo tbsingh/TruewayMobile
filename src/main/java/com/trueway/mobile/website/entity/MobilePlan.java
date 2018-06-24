@@ -1,9 +1,16 @@
 package com.trueway.mobile.website.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -38,6 +45,15 @@ public class MobilePlan extends MobileEntity implements Serializable {
     private String discount;
     private int price;
     private String priceCurr;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            })
+    @JoinTable(name = "PLAN_PHONE",
+            joinColumns = { @JoinColumn(name = "PLAN_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "PHONE_ID") })
+    private Set<MobilePhone> phones = new HashSet<>();
 
 	public String getRoiData() {
 		return roiData;
@@ -189,5 +205,12 @@ public class MobilePlan extends MobileEntity implements Serializable {
 
 	public void setPriceCurr(String priceCurr) {
 		this.priceCurr = priceCurr;
+	}
+	public Set<MobilePhone> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(Set<MobilePhone> phones) {
+		this.phones = phones;
 	}
 }

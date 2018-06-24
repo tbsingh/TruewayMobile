@@ -34,6 +34,5 @@ public class MobilePLanController {
 		return "Hi";
 		
 	}
-	
 }
 	
