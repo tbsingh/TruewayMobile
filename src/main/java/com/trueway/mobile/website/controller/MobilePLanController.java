@@ -26,12 +26,13 @@ public class MobilePLanController {
 	}
 	 @PostMapping(path = {"/plans"})
 	 MobilePlan createMobilePlan(@RequestBody MobilePlan mobilePlan){
+		
 		return planService.createMobilePlan(mobilePlan);
 		
 	}
 	 @GetMapping(path = {"/hello"})
 	 String sayHelo(){
-		return "Hi";
+		return "{ \"Hi\":\"Hello\"}";
 		
 	}
 }

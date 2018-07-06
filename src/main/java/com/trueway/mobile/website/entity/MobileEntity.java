@@ -1,5 +1,6 @@
 package com.trueway.mobile.website.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,19 +16,33 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @MappedSuperclass
-public abstract class MobileEntity {
+public class MobileEntity implements Serializable  {
+	
+	public MobileEntity()
+	{}
+	public MobileEntity(Long id, @NotBlank String name, String desc, Date createdAt, Date updatedAt) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.desc = desc;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
     private Long id;
     @NotBlank
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "DESCRIPTION")
     private String desc;
-    @Column(nullable = false, updatable = false)
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "UPDATED_AT", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;

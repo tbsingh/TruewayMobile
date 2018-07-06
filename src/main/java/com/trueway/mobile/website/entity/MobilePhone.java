@@ -1,8 +1,8 @@
 package com.trueway.mobile.website.entity;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,44 +15,58 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Entity
-@Table(name = "Phone")
-@EntityListeners(AuditingEntityListener.class)
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-public class MobilePhone extends MobileEntity implements Serializable {
-	private static long serialVersionUID = 1L;
+@Entity
+@Table(name = "PHONE")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+public class MobilePhone extends MobileEntity {
 	@NotBlank
     private String model;
-    @NotBlank
     private String memory;
-    @NotBlank
-    private String storage;
-    @NotBlank
+  	private String storage;
     private String color;
-    @NotBlank
     private String network;
-    @NotBlank
     private String display;
-    @NotBlank
     private String mainCamera;
-    @NotBlank
     private String frontCamera;
-    @NotBlank
     private String os;
-    @NotBlank
     private int price;
-    @NotBlank
     private String priceCurr;
     @Lob
     private byte[] image;
+    public MobilePhone()
+    {}
+    public MobilePhone(Long id, @NotBlank String name, String desc, Date createdAt, Date updatedAt,
+			@NotBlank String model, String memory, String storage, String color, String network, String display,
+			String mainCamera, String frontCamera, String os, int price, String priceCurr, byte[] image,
+			List<MobilePlan> plans) {
+		super(id, name, desc, createdAt, updatedAt);
+		this.model = model;
+		this.memory = memory;
+		this.storage = storage;
+		this.color = color;
+		this.network = network;
+		this.display = display;
+		this.mainCamera = mainCamera;
+		this.frontCamera = frontCamera;
+		this.os = os;
+		this.price = price;
+		this.priceCurr = priceCurr;
+		this.image = image;
+		this.plans = plans;
+	}
+    
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
             },
-            mappedBy = "tags")
-    private Set<MobilePlan> plans = new HashSet<>();
-	
+            mappedBy = "phones")
+    private List<MobilePlan> plans=new ArrayList<>();
+	   
 	public String getModel() {
 		return model;
 	}
@@ -133,11 +147,11 @@ public class MobilePhone extends MobileEntity implements Serializable {
 		this.image = image;
 	}
 
-	public Set<MobilePlan> getPlans() {
+	public List<MobilePlan> getPlans() {
 		return plans;
 	}
 
-	public void setPlans(Set<MobilePlan> plans) {
+	public void setPlans(List<MobilePlan> plans) {
 		this.plans = plans;
 	}
     

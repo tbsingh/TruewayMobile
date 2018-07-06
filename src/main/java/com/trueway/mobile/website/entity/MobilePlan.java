@@ -1,61 +1,95 @@
 package com.trueway.mobile.website.entity;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
-@Table(name = "Plan")
+@Table(name = "PLAN")
 @EntityListeners(AuditingEntityListener.class)
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+public class MobilePlan extends MobileEntity{
 
-public class MobilePlan extends MobileEntity implements Serializable {
+	public MobilePlan()
+	{}
+	public MobilePlan(Long id, @NotBlank String name, String desc, Date createdAt, Date updatedAt,String roiData, 
+			String roiFreeCall, String roiFreeText, String euData, String euFreeCall,
+			String euFreeText, String ukData, String ukFreeCall, String ukFreeText, String intData, String intFreeCall,
+			String intFreeText, String canadaRoaming, String usaRoaming, String reward, String contract,
+			String discount, int price, String priceCurr, List<MobilePhone> phones) {
+		super(id, name, desc, createdAt, updatedAt);
+		this.roiData = roiData;
+		this.roiFreeCall = roiFreeCall;
+		this.roiFreeText = roiFreeText;
+		this.euData = euData;
+		this.euFreeCall = euFreeCall;
+		this.euFreeText = euFreeText;
+		this.ukData = ukData;
+		this.ukFreeCall = ukFreeCall;
+		this.ukFreeText = ukFreeText;
+		this.intData = intData;
+		this.intFreeCall = intFreeCall;
+		this.intFreeText = intFreeText;
+		this.canadaRoaming = canadaRoaming;
+		this.usaRoaming = usaRoaming;
+		this.reward = reward;
+		this.contract = contract;
+		this.discount = discount;
+		this.price = price;
+		this.priceCurr = priceCurr;
+		this.phones = phones;
+	}
 
-	private static final long serialVersionUID = 1L;
 	private String roiData;
     private String roiFreeCall;
     private String roiFreeText;
-    
+
     private String euData;
     private String euFreeCall;
     private String euFreeText;
-    
+  
     private String ukData;
     private String ukFreeCall;
     private String ukFreeText;
-    
+  
     private String intData;
     private String intFreeCall;
     private String intFreeText;
-    
+   
     private String canadaRoaming;
-    private String usRoaming;
+    private String usaRoaming;
     private String reward;
     private String contract;
     private String discount;
     private int price;
     private String priceCurr;
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            })
+    	cascade = {
+        CascadeType.PERSIST,
+        CascadeType.MERGE
+    })
     @JoinTable(name = "PLAN_PHONE",
-            joinColumns = { @JoinColumn(name = "PLAN_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "PHONE_ID") })
-    private Set<MobilePhone> phones = new HashSet<>();
-
-	public String getRoiData() {
+            joinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") },
+            inverseJoinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") })
+    private List<MobilePhone> phones=new ArrayList<>();
+    
+   	public String getRoiData() {
 		return roiData;
 	}
 
@@ -160,11 +194,11 @@ public class MobilePlan extends MobileEntity implements Serializable {
 	}
 
 	public String getUsRoaming() {
-		return usRoaming;
+		return usaRoaming;
 	}
 
-	public void setUsRoaming(String usRoaming) {
-		this.usRoaming = usRoaming;
+	public void setUsRoaming(String usaRoaming) {
+		this.usaRoaming = usaRoaming;
 	}
 
 	public String getReward() {
@@ -206,11 +240,11 @@ public class MobilePlan extends MobileEntity implements Serializable {
 	public void setPriceCurr(String priceCurr) {
 		this.priceCurr = priceCurr;
 	}
-	public Set<MobilePhone> getPhones() {
+	public List<MobilePhone> getPhones() {
 		return phones;
 	}
 
-	public void setPhones(Set<MobilePhone> phones) {
+	public void setPhones(List<MobilePhone> phones) {
 		this.phones = phones;
 	}
 }

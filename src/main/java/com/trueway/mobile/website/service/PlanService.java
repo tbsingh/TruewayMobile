@@ -27,7 +27,7 @@ public class PlanService {
 
 	public MobilePlan createMobilePlan(MobilePlan mobilePlan) {
 		
-		return planRepository.save(mobilePlan);
+		return planRepository.saveAndFlush(mobilePlan);
 	}
 
 }
