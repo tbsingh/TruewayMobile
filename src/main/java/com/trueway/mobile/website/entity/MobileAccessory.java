@@ -1,27 +1,58 @@
 package com.trueway.mobile.website.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "Accessory")
+@Table(name = "ACCESSORY")
 @EntityListeners(AuditingEntityListener.class)
 public class MobileAccessory extends MobileEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@NotBlank
+	
     private int price;
-    @NotBlank
+    
     private String priceCurr;
     @Lob
     private byte[] image;
-    public int getPrice() {
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "accessories")
+    private List<MobilePhone> phones=new ArrayList<>();
+    
+	public MobileAccessory(@NotBlank String name, String desc, @NotBlank int price, @NotBlank String priceCurr, byte[] image) {
+		super(name, desc);
+		this.price = price;
+		this.priceCurr = priceCurr;
+		this.image = image;
+	}
+
+	public MobileAccessory() {
+		super();
+	}
+
+	public List<MobilePhone> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<MobilePhone> phones) {
+		this.phones = phones;
+	}
+
+	public int getPrice() {
 		return price;
 	}
 

@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -56,7 +58,6 @@ public class MobilePhone extends MobileEntity {
 		this.price = price;
 		this.priceCurr = priceCurr;
 		this.image = image;
-		this.plans = plans;
 	}
     
     @ManyToMany(fetch = FetchType.LAZY,
@@ -66,7 +67,23 @@ public class MobilePhone extends MobileEntity {
             },
             mappedBy = "phones")
     private List<MobilePlan> plans=new ArrayList<>();
+    
+    @ManyToMany(fetch = FetchType.LAZY,
+        	cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+        })
+    @JoinTable(name = "PHONE_ACCESSORY",
+            joinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") },
+            inverseJoinColumns = { @JoinColumn(name = "ACCESSORY_ID", referencedColumnName = "ID") })
+    List<MobileAccessory> accessories = new ArrayList<>();
 	   
+	public List<MobileAccessory> getAccessories() {
+		return accessories;
+	}
+	public void setAccessories(List<MobileAccessory> accessories) {
+		this.accessories = accessories;
+	}
 	public String getModel() {
 		return model;
 	}
