@@ -101,7 +101,21 @@ public class MobilePlan extends MobileEntity{
             inverseJoinColumns = { @JoinColumn(name = "OFFER_ID", referencedColumnName = "ID") })
     private List<PlanOffer> offers=new ArrayList<>();
     
-   	public String getUsaRoaming() {
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "plans")
+    private List<Customer> customers=new ArrayList<>();
+    
+   	public List<Customer> getCustomers() {
+		return customers;
+	}
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+	public String getUsaRoaming() {
 		return usaRoaming;
 	}
 	public void setUsaRoaming(String usaRoaming) {

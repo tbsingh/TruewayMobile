@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.trueway.mobile.website.entity.Customer;
 import com.trueway.mobile.website.entity.MobileAccessory;
 import com.trueway.mobile.website.entity.MobilePhone;
 import com.trueway.mobile.website.entity.MobilePlan;
@@ -39,8 +40,8 @@ public class JpaRepositoryTest {
 	private OfferRepository offerRepository;
 	@Autowired
 	private AccesssoryRepository accessoryRepository;
-//	@Autowired
-//	private CustomerRepository customerRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
 //	@Autowired
 //	private UserRepository userRepository;
 //	
@@ -83,5 +84,17 @@ public class JpaRepositoryTest {
 		phone.setAccessories(accessories);
 		phoneRepository.saveAndFlush(phone);
 	}
-
+	@Test
+	public void customerTest() {
+		Customer customer1 = new Customer("fistName1", "middleName1", "lastName1", "address1", "address2",
+										  "address3", "county1", "country1", "2018-07-06", "2018-07-06", "homePhone1",
+										  "mobilePhone", "email1", "email2");
+		customerRepository.saveAndFlush(customer1);
+		Customer customer2 = new Customer("fistName2", "middleName2", "lastName2", "address1", "address2",
+				  "address3", "county2", "country2", "2018-07-06", "2018-07-06", "homePhone2",
+				  "mobilePhone2", "email1", "email2");
+		customerRepository.saveAndFlush(customer2);
+		
+	}
+	
 }
