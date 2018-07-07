@@ -20,13 +20,10 @@ public class MobileEntity implements Serializable  {
 	
 	public MobileEntity()
 	{}
-	public MobileEntity(Long id, @NotBlank String name, String desc, Date createdAt, Date updatedAt) {
+	public MobileEntity(@NotBlank String name, String desc) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.desc = desc;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 	}
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

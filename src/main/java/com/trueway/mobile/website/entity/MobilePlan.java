@@ -28,12 +28,12 @@ public class MobilePlan extends MobileEntity{
 
 	public MobilePlan()
 	{}
-	public MobilePlan(Long id, @NotBlank String name, String desc, Date createdAt, Date updatedAt,String roiData, 
+	public MobilePlan(@NotBlank String name, String desc, String roiData,
 			String roiFreeCall, String roiFreeText, String euData, String euFreeCall,
 			String euFreeText, String ukData, String ukFreeCall, String ukFreeText, String intData, String intFreeCall,
 			String intFreeText, String canadaRoaming, String usaRoaming, String reward, String contract,
-			String discount, int price, String priceCurr, List<MobilePhone> phones) {
-		super(id, name, desc, createdAt, updatedAt);
+			String discount, int price, String priceCurr, List<MobilePhone> phones, List<PlanOffer> offers) {
+		super(name, desc);
 		this.roiData = roiData;
 		this.roiFreeCall = roiFreeCall;
 		this.roiFreeText = roiFreeText;
@@ -54,6 +54,7 @@ public class MobilePlan extends MobileEntity{
 		this.price = price;
 		this.priceCurr = priceCurr;
 		this.phones = phones;
+		this.offers=offers;
 	}
 
 	private String roiData;
@@ -79,6 +80,7 @@ public class MobilePlan extends MobileEntity{
     private String discount;
     private int price;
     private String priceCurr;
+    
     @ManyToMany(fetch = FetchType.LAZY,
     	cascade = {
         CascadeType.PERSIST,
@@ -89,7 +91,29 @@ public class MobilePlan extends MobileEntity{
             inverseJoinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") })
     private List<MobilePhone> phones=new ArrayList<>();
     
-   	public String getRoiData() {
+    @ManyToMany(fetch = FetchType.LAZY,
+        	cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+        })
+    @JoinTable(name = "PLAN_OFFER",
+            joinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") },
+            inverseJoinColumns = { @JoinColumn(name = "OFFER_ID", referencedColumnName = "ID") })
+    private List<PlanOffer> offers=new ArrayList<>();
+    
+   	public String getUsaRoaming() {
+		return usaRoaming;
+	}
+	public void setUsaRoaming(String usaRoaming) {
+		this.usaRoaming = usaRoaming;
+	}
+	public List<PlanOffer> getOffers() {
+		return offers;
+	}
+	public void setOffers(List<PlanOffer> offers) {
+		this.offers = offers;
+	}
+	public String getRoiData() {
 		return roiData;
 	}
 

@@ -39,11 +39,11 @@ public class MobilePhone extends MobileEntity {
     private byte[] image;
     public MobilePhone()
     {}
-    public MobilePhone(Long id, @NotBlank String name, String desc, Date createdAt, Date updatedAt,
+    public MobilePhone(@NotBlank String name, String desc,
 			@NotBlank String model, String memory, String storage, String color, String network, String display,
-			String mainCamera, String frontCamera, String os, int price, String priceCurr, byte[] image,
-			List<MobilePlan> plans) {
-		super(id, name, desc, createdAt, updatedAt);
+			String mainCamera, String frontCamera, String os, int price, String priceCurr, byte[] image
+			) {
+		super(name, desc);
 		this.model = model;
 		this.memory = memory;
 		this.storage = storage;
