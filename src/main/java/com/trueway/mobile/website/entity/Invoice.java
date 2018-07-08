@@ -19,21 +19,21 @@ public class Invoice extends MobileEntity{
 	private Long discount;
 	private Long totalAmt;
 	private Long netAmt;
-	private String parMethod;
+	private String payMethod;
 	public Long getPlanId() {
 		return planId;
 	}
 	public Invoice() {
 		super();
 	}
-	public Invoice(@NotBlank String name, String desc, Long planId, Long custId, Long discount, Long totalAmt, Long netAmt, String parMethod) {
+	public Invoice(@NotBlank String name, String desc, Long planId, Long custId, Long discount, Long totalAmt, Long netAmt, String payMethod) {
 		super(name, desc);
 		this.planId = planId;
 		this.custId = custId;
 		this.discount = discount;
 		this.totalAmt = totalAmt;
 		this.netAmt = netAmt;
-		this.parMethod = parMethod;
+		this.payMethod = payMethod;
 	}
 	public void setPlanId(Long planId) {
 		this.planId = planId;
@@ -62,11 +62,11 @@ public class Invoice extends MobileEntity{
 	public void setNetAmt(Long netAmt) {
 		this.netAmt = netAmt;
 	}
-	public String getParMethod() {
-		return parMethod;
+	public String getPayMethod() {
+		return payMethod;
 	}
-	public void setParMethod(String parMethod) {
-		this.parMethod = parMethod;
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
 	}
 	
 }

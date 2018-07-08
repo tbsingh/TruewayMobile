@@ -44,7 +44,7 @@ public class Customer implements Serializable {
 	
 	private String homePhone;
 	private String mobilePhone;
-	private String email1;
+	private String email;
 	private String email2;
 	@OneToMany(
 	        cascade = CascadeType.ALL, 
@@ -56,9 +56,9 @@ public class Customer implements Serializable {
 	        CascadeType.PERSIST,
 	        CascadeType.MERGE
 	    })
-	    @JoinTable(name = "CUSTOMER_PLAN",
-	            joinColumns = { @JoinColumn(name = "CUST_ID", referencedColumnName = "ID") },
-	            inverseJoinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") })
+	@JoinTable(name = "CUSTOMER_PLAN",
+	    joinColumns = { @JoinColumn(name = "CUST_ID", referencedColumnName = "ID") },
+	    inverseJoinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") })
 	private List<MobilePlan> plans = new ArrayList<>();
 	
 	public Long getId() {
@@ -90,9 +90,8 @@ public class Customer implements Serializable {
 		this.planEnd = planEnd;
 		this.homePhone = homePhone;
 		this.mobilePhone = mobilePhone;
-		this.email1 = email1;
+		this.email = email1;
 		this.email2 = email2;
-		this.invoices = invoices;
 	}
 	public String getFistName() {
 		return firstName;
@@ -166,11 +165,11 @@ public class Customer implements Serializable {
 	public void setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
 	}
-	public String getEmail1() {
-		return email1;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmail1(String email1) {
-		this.email1 = email1;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getEmail2() {
 		return email2;
