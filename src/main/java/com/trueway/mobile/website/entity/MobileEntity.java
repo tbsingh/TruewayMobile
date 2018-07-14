@@ -23,7 +23,7 @@ public class MobileEntity implements Serializable  {
 	public MobileEntity(@NotBlank String name, String desc) {
 		super();
 		this.name = name;
-		this.desc = desc;
+		this.description = desc;
 	}
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +33,9 @@ public class MobileEntity implements Serializable  {
     @Column(name = "NAME")
     private String name;
     @Column(name = "DESCRIPTION")
-    private String desc;
-    @Column(name = "CREATED_AT", nullable = false, updatable = false)
+    private String description;
+   
+	@Column(name = "CREATED_AT", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
@@ -47,7 +48,12 @@ public class MobileEntity implements Serializable  {
     public Long getId() {
 		return id;
 	}
-
+    public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -74,12 +80,5 @@ public class MobileEntity implements Serializable  {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
 	}
 }

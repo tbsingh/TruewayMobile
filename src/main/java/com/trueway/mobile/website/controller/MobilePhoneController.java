@@ -9,30 +9,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trueway.mobile.website.entity.MobilePhone;
 import com.trueway.mobile.website.entity.MobilePlan;
+import com.trueway.mobile.website.service.PhoneService;
 import com.trueway.mobile.website.service.PlanService;
 
 @RestController
 @RequestMapping({"/trueway/mobile"})
-public class MobilePLanController {
+public class MobilePhoneController {
 	
 	 @Autowired
-	 private PlanService planService;
+	 private PhoneService phoneService;
 	 
-	 @GetMapping(path = {"/v1//plans"})
-	 List<MobilePlan> getAllMobilePlans(){
-		return planService.getAllMobilePlans();
+	 @GetMapping(path = {"v1/phones"})
+	 List<MobilePhone> getAllMobilePhones(){
+		return phoneService.getAllMobilePhones();
 		
 	}
-	 @PostMapping(path = {"/v1/plans"})
-	 MobilePlan createMobilePlan(@RequestBody MobilePlan mobilePlan){
+	 @PostMapping(path = {"/v1/phones"})
+	 MobilePhone createMobilePlan(@RequestBody MobilePhone mobilePhone){
 		
-		return planService.createMobilePlan(mobilePlan);
-		
-	}
-	 @GetMapping(path = {"/hello"})
-	 String sayHelo(){
-		return "{ \"Hi\":\"Hello\"}";
+		return phoneService.createMobilePhone(mobilePhone);
 		
 	}
 }
