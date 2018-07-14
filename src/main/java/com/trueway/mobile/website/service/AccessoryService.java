@@ -6,28 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trueway.mobile.website.entity.MobileAccessory;
-import com.trueway.mobile.website.repo.AccesssoryRepository;
+import com.trueway.mobile.website.repo.AccessoryRepository;
 
 @Service
 public class AccessoryService {
+	
 	@Autowired
-	private AccesssoryRepository accesssoryRepository;
+	private AccessoryRepository accessoryRepository;
 
-	public AccesssoryRepository getAccesssoryRepository() {
-		return accesssoryRepository;
+	public AccessoryRepository getAccesssoryRepository() {
+		return accessoryRepository;
 	}
 
-	public void setAccesssoryRepository(AccesssoryRepository AccesssoryRepository) {
-		this.accesssoryRepository = AccesssoryRepository;
+	public void setAccesssoryRepository(AccessoryRepository accesssoryRepository) {
+		this.accessoryRepository = accesssoryRepository;
 	}
 
 	public List<MobileAccessory> getAllAccessories() {
-		return accesssoryRepository.findAll();
+		return accessoryRepository.findAll();
 	}
 
 	public MobileAccessory createMobileAccessory(MobileAccessory mobileAccessory) {
 		
-		return accesssoryRepository.saveAndFlush(mobileAccessory);
+		return accessoryRepository.saveAndFlush(mobileAccessory);
 	}
 
 }

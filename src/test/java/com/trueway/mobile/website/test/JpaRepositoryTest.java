@@ -20,7 +20,7 @@ import com.trueway.mobile.website.entity.MobileAccessory;
 import com.trueway.mobile.website.entity.MobilePhone;
 import com.trueway.mobile.website.entity.MobilePlan;
 import com.trueway.mobile.website.entity.PlanOffer;
-import com.trueway.mobile.website.repo.AccesssoryRepository;
+import com.trueway.mobile.website.repo.AccessoryRepository;
 import com.trueway.mobile.website.repo.AppUserRepository;
 import com.trueway.mobile.website.repo.CustomerRepository;
 import com.trueway.mobile.website.repo.InvoiceRepository;
@@ -40,7 +40,7 @@ public class JpaRepositoryTest {
 	@Autowired
 	private OfferRepository offerRepository;
 	@Autowired
-	private AccesssoryRepository accessoryRepository;
+	private AccessoryRepository accessoryRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
 	@Autowired

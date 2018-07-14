@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.trueway.mobile.website.entity.MobileAccessory;
 
-@Repository
-public interface AccesssoryRepository extends JpaRepository<MobileAccessory, Long> {
+@Repository("accessoryRepository")
+public interface AccessoryRepository extends JpaRepository<MobileAccessory, Long> {
 }
