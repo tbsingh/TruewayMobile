@@ -20,12 +20,12 @@ public class PlanOfferController {
 	 private OfferService offerService;
 	 
 	 @GetMapping(path = {"v1/offers"})
-	 List<PlanOffer> getAllMobilePhones(){
+	 List<PlanOffer> getAllOffers(){
 		return offerService.getAllOffers();
 		
 	}
 	 @PostMapping(path = {"/v1/offers"})
-	 PlanOffer createMobilePlan(@RequestBody PlanOffer planOffer){
+	 PlanOffer createPlanOffer(@RequestBody PlanOffer planOffer){
 		
 		return offerService.createPlanOffer(planOffer);
 		

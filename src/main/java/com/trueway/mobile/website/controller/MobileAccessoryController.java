@@ -29,7 +29,7 @@ public class MobileAccessoryController {
 		
 	}
 	 @PostMapping(path = {"/v1/accessories"})
-	 MobileAccessory createMobilePlan(@RequestBody MobileAccessory mobileAccessory){
+	 MobileAccessory createMobileAccessory(@RequestBody MobileAccessory mobileAccessory){
 		
 		return service.createMobileAccessory(mobileAccessory);
 		
