@@ -60,19 +60,10 @@ public class MobilePhone extends MobileEntity {
 		this.image = image;
 	}
     
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "phones")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "phones")
     private List<MobilePlan> plans=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY,
-        	cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-        })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PHONE_ACCESSORY",
             joinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "ACCESSORY_ID", referencedColumnName = "ID") })

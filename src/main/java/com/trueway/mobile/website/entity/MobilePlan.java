@@ -81,32 +81,19 @@ public class MobilePlan extends MobileEntity{
     private int price;
     private String priceCurr;
     
-    @ManyToMany(fetch = FetchType.LAZY,
-    	cascade = {
-        CascadeType.PERSIST,
-        CascadeType.MERGE
-    })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PLAN_PHONE",
             joinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") })
     private List<MobilePhone> phones=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY,
-        	cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-        })
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PLAN_OFFER",
             joinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "OFFER_ID", referencedColumnName = "ID") })
     private List<PlanOffer> offers=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "plans")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "plans")
     private List<Customer> customers=new ArrayList<>();
     
    	public List<Customer> getCustomers() {

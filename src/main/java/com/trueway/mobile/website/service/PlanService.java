@@ -22,11 +22,16 @@ public class PlanService {
 	}
 
 	public List<MobilePlan> getAllMobilePlans() {
-		return planRepository.findAll();
+		List<MobilePlan> plans = planRepository.findAll();
+		return plans;
 	}
 
 	public MobilePlan createMobilePlan(MobilePlan mobilePlan) {
 		
+		return planRepository.saveAndFlush(mobilePlan);
+	}
+
+	public MobilePlan updateMobilePlan(MobilePlan mobilePlan) {
 		return planRepository.saveAndFlush(mobilePlan);
 	}
 

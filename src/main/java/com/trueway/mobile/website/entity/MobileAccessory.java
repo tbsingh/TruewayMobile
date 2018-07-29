@@ -25,12 +25,7 @@ public class MobileAccessory extends MobileEntity implements Serializable {
     private String priceCurr;
     @Lob
     private byte[] image;
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "accessories")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "accessories")
     private List<MobilePhone> phones=new ArrayList<>();
     
 	public MobileAccessory(@NotBlank String name, String desc, @NotBlank int price, @NotBlank String priceCurr, byte[] image) {

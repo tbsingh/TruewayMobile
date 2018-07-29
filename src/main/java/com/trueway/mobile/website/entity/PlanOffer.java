@@ -31,12 +31,7 @@ public class PlanOffer extends MobileEntity implements Serializable {
     private int valuePerc;
     private int valueFixed;
     
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "offers")
+    @ManyToMany(fetch = FetchType.LAZY,  mappedBy = "offers")
     private List<MobilePlan> plans=new ArrayList<>();
     
 	public List<MobilePlan> getPlans() {

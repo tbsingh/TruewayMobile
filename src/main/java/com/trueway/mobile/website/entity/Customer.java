@@ -51,11 +51,7 @@ public class Customer implements Serializable {
 	        orphanRemoval = true)
 	@JoinColumn(name = "CUST_ID")
 	private List<Invoice> invoices = new ArrayList<>();
-	@ManyToMany(fetch = FetchType.LAZY,
-	    	cascade = {
-	        CascadeType.PERSIST,
-	        CascadeType.MERGE
-	    })
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "CUSTOMER_PLAN",
 	    joinColumns = { @JoinColumn(name = "CUST_ID", referencedColumnName = "ID") },
 	    inverseJoinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") })
