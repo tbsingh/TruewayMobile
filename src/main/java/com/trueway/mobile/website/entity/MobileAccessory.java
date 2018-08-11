@@ -15,24 +15,26 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "ACCESSORY")
 @EntityListeners(AuditingEntityListener.class)
 public class MobileAccessory extends MobileEntity implements Serializable {
 	
     private int price;
-    
+    private int active;
     private String priceCurr;
-    @Lob
-    private byte[] image;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "accessories")
+    private Long imageId;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE}, mappedBy = "accessories")
     private List<MobilePhone> phones=new ArrayList<>();
     
-	public MobileAccessory(@NotBlank String name, String desc, @NotBlank int price, @NotBlank String priceCurr, byte[] image) {
+	public MobileAccessory(@NotBlank String name, String desc, @NotBlank int price, @NotBlank String priceCurr, Long image) {
 		super(name, desc);
 		this.price = price;
 		this.priceCurr = priceCurr;
-		this.image = image;
+		this.setImageId(image);
 	}
 
 	public MobileAccessory() {
@@ -61,5 +63,21 @@ public class MobileAccessory extends MobileEntity implements Serializable {
 
 	public void setPriceCurr(String priceCurr) {
 		this.priceCurr = priceCurr;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public Long getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
 	}
 }

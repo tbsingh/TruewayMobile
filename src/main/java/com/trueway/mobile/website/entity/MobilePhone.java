@@ -1,7 +1,6 @@
 package com.trueway.mobile.website.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,12 +17,12 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "PHONE")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class MobilePhone extends MobileEntity {
 	@NotBlank
     private String model;
@@ -37,13 +36,13 @@ public class MobilePhone extends MobileEntity {
     private String os;
     private int price;
     private String priceCurr;
-    @Lob
-    private byte[] image;
+    private int active;
+    private Long imageId;
     public MobilePhone()
     {}
     public MobilePhone(@NotBlank String name, String desc,
 			@NotBlank String model, String memory, String storage, String color, String network, String display,
-			String mainCamera, String frontCamera, String os, int price, String priceCurr, byte[] image
+			String mainCamera, String frontCamera, String os, int price, String priceCurr, Long image
 			) {
 		super(name, desc);
 		this.model = model;
@@ -57,13 +56,14 @@ public class MobilePhone extends MobileEntity {
 		this.os = os;
 		this.price = price;
 		this.priceCurr = priceCurr;
-		this.image = image;
+		this.setImageId(image);
 	}
-    
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "phones")
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE}, mappedBy = "phones")
     private List<MobilePlan> plans=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = 
+        {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "PHONE_ACCESSORY",
             joinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "ACCESSORY_ID", referencedColumnName = "ID") })
@@ -147,14 +147,6 @@ public class MobilePhone extends MobileEntity {
 		this.os = os;
 	}
 
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
 	public List<MobilePlan> getPlans() {
 		return plans;
 	}
@@ -177,5 +169,17 @@ public class MobilePhone extends MobileEntity {
 
 	public void setPriceCurr(String priceCurr) {
 		this.priceCurr = priceCurr;
+	}
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
+	}
+	public Long getImageId() {
+		return imageId;
+	}
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
 	}
 }

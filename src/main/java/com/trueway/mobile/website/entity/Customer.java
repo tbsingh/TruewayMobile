@@ -41,11 +41,11 @@ public class Customer implements Serializable {
 	private String country;
 	private String planStart;
 	private String planEnd;
-	
 	private String homePhone;
 	private String mobilePhone;
 	private String email;
 	private String email2;
+	private Boolean active;
 	@OneToMany(
 	        cascade = CascadeType.ALL, 
 	        orphanRemoval = true)
@@ -68,13 +68,13 @@ public class Customer implements Serializable {
 	public void setPlans(List<MobilePlan> plans) {
 		this.plans = plans;
 	}
-	Customer(){
+	public Customer(){
 	}
-	public Customer(String fistName, String middleName, String lastName, String address1, String address2,
+	public Customer(String firstName, String middleName, String lastName, String address1, String address2,
 			String address3, String county, String country, String planStart, String planEnd, String homePhone,
 			String mobilePhone, String email1, String email2) {
 		super();
-		this.firstName = fistName;
+		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 		this.address1 = address1;
@@ -89,11 +89,11 @@ public class Customer implements Serializable {
 		this.email = email1;
 		this.email2 = email2;
 	}
-	public String getFistName() {
+	public String getFirstName() {
 		return firstName;
 	}
-	public void setFistName(String fistName) {
-		this.firstName = fistName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	public String getMiddleName() {
 		return middleName;
@@ -178,5 +178,11 @@ public class Customer implements Serializable {
 	}
 	public void setInvoices(List<Invoice> invoices) {
 		this.invoices = invoices;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }

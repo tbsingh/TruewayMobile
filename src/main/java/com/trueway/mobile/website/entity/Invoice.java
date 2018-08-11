@@ -20,6 +20,7 @@ public class Invoice extends MobileEntity{
 	private Long totalAmt;
 	private Long netAmt;
 	private String payMethod;
+	private Boolean active;
 	public Long getPlanId() {
 		return planId;
 	}
@@ -67,6 +68,12 @@ public class Invoice extends MobileEntity{
 	}
 	public void setPayMethod(String payMethod) {
 		this.payMethod = payMethod;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 }

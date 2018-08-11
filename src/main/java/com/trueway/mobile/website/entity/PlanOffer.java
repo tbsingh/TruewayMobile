@@ -15,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "OFFER")
 @EntityListeners(AuditingEntityListener.class)
@@ -30,8 +32,10 @@ public class PlanOffer extends MobileEntity implements Serializable {
 	
     private int valuePerc;
     private int valueFixed;
+    private int active;
     
-    @ManyToMany(fetch = FetchType.LAZY,  mappedBy = "offers")
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE},  mappedBy = "offers")
     private List<MobilePlan> plans=new ArrayList<>();
     
 	public List<MobilePlan> getPlans() {
@@ -51,5 +55,11 @@ public class PlanOffer extends MobileEntity implements Serializable {
 	}
 	public void setValueFixed(int valueFixed) {
 		this.valueFixed = valueFixed;
+	}
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
 	}
 }

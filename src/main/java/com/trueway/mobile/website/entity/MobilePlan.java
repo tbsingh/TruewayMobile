@@ -18,6 +18,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -80,14 +81,16 @@ public class MobilePlan extends MobileEntity{
     private String discount;
     private int price;
     private String priceCurr;
-    
-    @ManyToMany(fetch = FetchType.LAZY)
+    private int active;
+     
+	@ManyToMany(cascade = 
+        {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "PLAN_PHONE",
             joinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "PHONE_ID", referencedColumnName = "ID") })
     private List<MobilePhone> phones=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "PLAN_OFFER",
             joinColumns = { @JoinColumn(name = "PLAN_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "OFFER_ID", referencedColumnName = "ID") })
@@ -271,5 +274,11 @@ public class MobilePlan extends MobileEntity{
 
 	public void setPhones(List<MobilePhone> phones) {
 		this.phones = phones;
+	}
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
 	}
 }

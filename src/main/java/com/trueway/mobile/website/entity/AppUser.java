@@ -25,28 +25,31 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "APPUSER")
 @EntityListeners(AuditingEntityListener.class)
-public class AppUser implements Serializable {
+public class AppUser extends MobileEntity implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
     private Long id;
 	private String login;
 	private String password;
-	private Boolean createonly;
-	private Boolean readonly;
-	private Boolean updateonly;
-	private Boolean deactive;
-	public AppUser(String login, String password, Boolean creat, Boolean read, Boolean updat,
-			Boolean deactive) {
+	private String createOnly;
+	private String readOnly;
+	private String updateOnly;
+	private Boolean active;
+	public AppUser(String login, String password, String creat, String read, String updat
+			) {
 		super();
 		this.login = login;
 		this.password = password;
-		this.createonly = creat;
-		this.readonly = read;
-		this.updateonly = updat;
-		this.deactive = deactive;
+		this.createOnly = creat;
+		this.readOnly = read;
+		this.updateOnly = updat;
 	}
 		
+	public AppUser() {
+		
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -66,34 +69,37 @@ public class AppUser implements Serializable {
 		this.password = password;
 	}
 	
-	public Boolean getReadonly() {
-		return readonly;
+	public String getReadOnly() {
+		return readOnly;
 	}
 
-	public void setReadonly(Boolean readonly) {
-		this.readonly = readonly;
+	public void setReadOnly(String readOnly) {
+		this.readOnly = readOnly;
 	}
 
-	public Boolean getUpdateonly() {
-		return updateonly;
+	public String getUpdateOnly() {
+		return updateOnly;
 	}
 
-	public void setUpdateonly(Boolean updateonly) {
-		this.updateonly = updateonly;
+	public void setUpdateOnly(String updateOnly) {
+		this.updateOnly = updateOnly;
 	}
 
-	public Boolean getDeactive() {
-		return deactive;
-	}
-	public void setDeactive(Boolean deactive) {
-		this.deactive = deactive;
-	}
-	public Boolean getCreateonly() {
-		return createonly;
+	
+	public String getCreateOnly() {
+		return createOnly;
 	}
 
-	public void setCreateonly(Boolean createonly) {
-		this.createonly = createonly;
+	public void setCreateOnly(String createOnly) {
+		this.createOnly = createOnly;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 }
