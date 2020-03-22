@@ -1,5 +1,6 @@
 package com.trueway.mobile.website.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,10 @@ public class AppUserController {
 	 AppUser deleteAppUser(@RequestBody AppUser appUser){
 		 return service.disableAppUser(appUser);
 	}
+	 @GetMapping(path = {"v1/user/me"})
+	 public Principal user(Principal principal){
+		return principal;
+	}
+	 
 }
 	

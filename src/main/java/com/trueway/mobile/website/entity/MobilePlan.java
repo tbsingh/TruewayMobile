@@ -57,30 +57,45 @@ public class MobilePlan extends MobileEntity{
 		this.phones = phones;
 		this.offers=offers;
 	}
-
+	@Column(name = "ROI_DATA")
 	private String roiData;
+	@Column(name = "ROI_FREE_CALL")
     private String roiFreeCall;
+    @Column(name = "ROI_FREE_TEXT")
     private String roiFreeText;
-
+    @Column(name = "EU_DATA")
     private String euData;
+    @Column(name = "EU_FREE_CALL")
     private String euFreeCall;
+    @Column(name = "EU_FREE_TEXT")
     private String euFreeText;
-  
+    @Column(name = "UK_DATA")
     private String ukData;
+    @Column(name = "UK_FREE_CALL")
     private String ukFreeCall;
+    @Column(name = "UK_FREE_TEXT")
     private String ukFreeText;
-  
+    @Column(name = "INT_DATA")
     private String intData;
+    @Column(name = "INT_FREE_CALL")
     private String intFreeCall;
+    @Column(name = "INT_FREE_TEXT")
     private String intFreeText;
-   
+    @Column(name = "CANADA_ROAMING")
     private String canadaRoaming;
+    @Column(name = "USA_ROAMING")
     private String usaRoaming;
+    @Column(name = "REWARD")
     private String reward;
+    @Column(name = "CONTRACT")
     private String contract;
+    @Column(name = "DISCOUNT")
     private String discount;
+    @Column(name = "PRICE")
     private int price;
+    @Column(name = "PRICE_CURR")
     private String priceCurr;
+    @Column(name = "ACTIVE")
     private int active;
      
 	@ManyToMany(cascade = 

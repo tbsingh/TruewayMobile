@@ -41,9 +41,14 @@ public class ImageController {
 		}
 		 return imageSaved == null? 0 : imageSaved.getId();
 	}
+	 @GetMapping(path = "/v1/images")
+	 List<Image> getImages(){
+		 return service.getActiveImages();
+	}
 	 @GetMapping(path = "/v1/images/{imgeId}")
 	 Image getImage(@PathVariable("imgeId") String imageId){
-		 return service.find(Long.parseLong(imageId));
+		 Image image = service.find(Long.parseLong(imageId));
+		 return image;
 	}
 }
 	

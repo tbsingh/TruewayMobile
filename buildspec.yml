@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - mvn clean
+      - mvn test
+      - mvn install
+artifacts:
+  files:
+     - target/TruwayMobileAPIServer-1.0.jar
+     - appspec.yml
+     - scripts/server_stop.sh
+     - scripts/server_start.sh
+     - scripts/server_validate.sh
